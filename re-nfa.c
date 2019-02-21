@@ -10,6 +10,27 @@ int contains(char string[], char character) {
 	return 0;
 }
 
+void printStatesNfa(char states[], char nfa[40][40]) {
+	int i, j;
+	int statesSize = strlen(states);
+	
+	printf("- ");
+	for(i = 0; i < statesSize; i++)
+		printf("%c ", states[i]);
+	printf("\n");
+	for(i = 0; i < statesSize + 1; i++)
+		printf("--");
+	printf("\n");
+	
+	for(i = 0; i < statesSize; i++) {
+		printf("%c|", states[i]);
+		for(j = 0; j < statesSize; j++) {
+			printf("%c ", nfa[i][j]);
+		}
+		printf("\n");
+	}
+}
+
 void printNFA(char nfa[40][40]) {
 	int i, j;
 	int statesSize = strlen(nfa[0]);
@@ -55,7 +76,7 @@ void reToNfa(const char* re) {
 	//Filling with 0-s
 	for(i = 0; i < statesSize; i++) {
 		for(j = 0; j < statesSize; j++) {
-			nfa[i][j] = '0';
+			nfa[i][j] = '-';
 		}
 		nfa[i][statesSize] = 0;
 	}
@@ -64,7 +85,7 @@ void reToNfa(const char* re) {
 	//Adding transition from alphabet to next state
 	for(i = 0; i < strlen(re); i++) {
 		if(contains(alphabet, re[i]))
-			nfa[i][i + 1] = '1';
+			nfa[i][i + 1] = re[i];
 	}
 	
 	//Adding E-transition from paranthesis to next state
@@ -102,6 +123,8 @@ void reToNfa(const char* re) {
 	}
 	
 	//printing
+	//printStatesNfa(states, nfa);
+	//printf("\n\n\n");
 	printNFA(nfa);
 }
 
