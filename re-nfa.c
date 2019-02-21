@@ -10,27 +10,6 @@ int contains(char string[], char character) {
 	return 0;
 }
 
-void printStatesNfa(char states[], char nfa[40][40]) {
-	int i, j;
-	int statesSize = strlen(states);
-	
-	printf("- ");
-	for(i = 0; i < statesSize; i++)
-		printf("%c ", states[i]);
-	printf("\n");
-	for(i = 0; i < statesSize + 1; i++)
-		printf("--");
-	printf("\n");
-	
-	for(i = 0; i < statesSize; i++) {
-		printf("%c|", states[i]);
-		for(j = 0; j < statesSize; j++) {
-			printf("%c ", nfa[i][j]);
-		}
-		printf("\n");
-	}
-}
-
 void printNFA(char nfa[40][40]) {
 	int i, j;
 	int statesSize = strlen(nfa[0]);
@@ -123,8 +102,6 @@ void reToNfa(const char* re) {
 	}
 	
 	//printing
-	//printStatesNfa(states, nfa);
-	//printf("\n\n\n");
 	printNFA(nfa);
 }
 
