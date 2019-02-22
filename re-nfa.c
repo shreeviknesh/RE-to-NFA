@@ -73,7 +73,7 @@ void reToNfa(const char* re) {
 	alphabet[alphabetSize] = 0;
 	meta[metaSize] = 0;
 	
-	//Filling with 0-s
+	//Filling with hyphen-s
 	for(i = 0; i < statesSize; i++) {
 		for(j = 0; j < statesSize; j++) {
 			nfa[i][j] = '-';
@@ -81,7 +81,6 @@ void reToNfa(const char* re) {
 		nfa[i][statesSize] = 0;
 	}
 			
-	
 	//Adding transition from alphabet to next state
 	for(i = 0; i < strlen(re); i++) {
 		if(contains(alphabet, re[i]))
@@ -99,7 +98,6 @@ void reToNfa(const char* re) {
 		if(re[i] == '*') {
 			nfa[i][i + 1] = 'E';
 			if(re[i - 1] != ')') {
-				nfa[i - 1][i] = 'E';
 				nfa[i][i - 1] = 'E';
 			} else {
 				temp = i;
